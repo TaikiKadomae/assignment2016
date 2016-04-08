@@ -35,6 +35,7 @@ countOfLoop = 0
 top10 = []
 for k, v in sorted(count.items(), key = lambda x:x[1]):
 	countOfLoop += 1
+	print(v, k)
 	if (countOfLoop > len(count) - 10):
 		top10.append(str(v) + " " + k)
 

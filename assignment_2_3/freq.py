@@ -28,7 +28,7 @@ for line in open(argvs[1], 'r'):
 			count[sp[i]] = 1
 
 #辞書から改行を削除
-del count["\n"]
+del count[""]
 
 #辞書を値順にソートして表示
 countOfLoop = 0
@@ -37,7 +37,7 @@ for k, v in sorted(count.items(), key = lambda x:x[1]):
 	countOfLoop += 1
 	if (countOfLoop > len(count) - 10):
 		top10.append(str(v) + " " + k)
-
+		print(v, k)
 #比較する
 if (argc == 3):
 	diff = difflib.unified_diff(top10, open(argvs[2], 'r').read().strip().split('\n'))

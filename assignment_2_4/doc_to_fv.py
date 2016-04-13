@@ -22,6 +22,7 @@ for i in sent_tokenize_list:
 #辞書に追加
 count = OrderedDict()
 index = shelve.open('freq_to_index_shelve.db')
+
 try:
 	countOfIndex = len(index)
 	for i in range(len(word_tokenize_list)):
@@ -32,10 +33,15 @@ try:
 			if not word_tokenize_list[i] in index:
 				index[word_tokenize_list[i]] = countOfIndex
 				countOfIndex += 1
+	#特徴ベクトルの生成
+	feature_vector = [0] * len(index)
+	for key, value in count.items():
+		feature_vector[index[key]] = count[key]
 	
-	for key in word_tokenize_list:
-		if key in index:
-			print (str(index[key]) + ':' + str(count[key]), end=' ')
+#何があっても.dbは閉じる
 finally:
 	index.close()
 
+for j in range(len(feature_vector)):
+	print (str(j) + ':' + str(feature_vector[j]), end=' ')
+print('')

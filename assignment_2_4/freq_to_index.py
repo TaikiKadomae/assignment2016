@@ -22,7 +22,7 @@ for i in sent_tokenize_list:
 #辞書に追加
 count = OrderedDict()
 index = OrderedDict()
-countOfIndex = 0
+countOfIndex = 1
 for i in range(len(word_tokenize_list)):
 	if word_tokenize_list[i] in count:
 		count[word_tokenize_list[i]] += 1

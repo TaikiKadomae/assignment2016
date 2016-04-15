@@ -31,17 +31,19 @@ try:
 		else:
 			count[word_tokenize_list[i]] = 1
 			if not word_tokenize_list[i] in index:
-				index[word_tokenize_list[i]] = countOfIndex
+				index[word_tokenize_list[i]] = countOfIndex + 1
 				countOfIndex += 1
+	
 	#特徴ベクトルの生成
 	feature_vector = [0] * len(index)
 	for key, value in count.items():
-		feature_vector[index[key]] = count[key]
+		
+		feature_vector[index[key] - 1] = value
 	
 #何があっても.dbは閉じる
 finally:
 	index.close()
 
 for j in range(len(feature_vector)):
-	print (str(j) + ':' + str(feature_vector[j]), end=' ')
+	print (str(j + 1) + ':' + str(feature_vector[j]), end=' ')
 print('')

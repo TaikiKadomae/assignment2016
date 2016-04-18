@@ -45,5 +45,6 @@ finally:
 	index.close()
 
 for j in range(len(feature_vector)):
-	print (str(j + 1) + ':' + str(feature_vector[j]), end=' ')
+	if feature_vector[j] != 0:
+		print (str(j + 1) + ':' + str(feature_vector[j]), end=' ')
 print('')

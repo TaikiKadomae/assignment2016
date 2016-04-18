@@ -54,5 +54,6 @@ for txt in fileList:
 		index.close()
 
 	for l in range(len(fv)):
-		print (str(l + 1) + ':' + str(fv[l]), end=' ')
+		if fv[l] != 0:
+			print (str(l + 1) + ':' + str(fv[l]), end=' ')
 	print('')

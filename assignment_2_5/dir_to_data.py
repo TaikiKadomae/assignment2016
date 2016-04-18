@@ -54,5 +54,6 @@ for txt in fileList:
 	#ラベルとインデックスと出現回数を印字
 	print(argvs[2], end=' ')
 	for l in range(len(fv)):
-		print (str(l + 1) + ':' + str(fv[l]), end=' ')
-	print('\n')
+		if(fv[l] != 0)
+			print (str(l + 1) + ':' + str(fv[l]), end=' ')
+	print('')	

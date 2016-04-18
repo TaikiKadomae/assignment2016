@@ -30,7 +30,3 @@ for i in range(len(word_tokenize_list)):
 		count[word_tokenize_list[i]] = 1
 		index[word_tokenize_list[i]] = countOfIndex
 		countOfIndex += 1
-print(index)
-#辞書を値順にソートし表示
-for k, v in sorted(count.items(), key = lambda x:x[1]):
-	print(v, k)

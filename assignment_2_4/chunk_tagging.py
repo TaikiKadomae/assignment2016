@@ -19,7 +19,7 @@ tagger = SennaChunkTagger('/usr/share/senna-v2.0')
 #文分割
 openedFile = open(argvs[1]).read()
 sent_tokenize_list = sent_tokenize(openedFile)
-print(sent_tokenize_list[0])
+
 
 #１行目の単語分割
 word_tokenize_list = word_tokenize(sent_tokenize_list[0])

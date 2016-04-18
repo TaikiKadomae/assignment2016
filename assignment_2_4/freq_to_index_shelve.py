@@ -35,6 +35,4 @@ try:
 finally:
 	index.close()
 
-#辞書を値順にソートし表示
-for k, v in sorted(count.items(), key = lambda x:x[1]):
-	print(v, k)
+

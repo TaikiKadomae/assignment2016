@@ -10,7 +10,7 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 
 
 argvs = sys.argv
-argc = len(argvs)
+
 
 #ディレクトリからファイルを取り出す
 fileList = []
@@ -35,14 +35,14 @@ for txt in fileList:
 	index = shelve.open('freq_to_index_shelve.db')
 
 	try:
-		countOfIndex = len(index)
+		countOfIndex = len(index) + 1
 		for k in range(len(word_tokenize_list)):
 			if word_tokenize_list[k] in count:
 				count[word_tokenize_list[k]] += 1
 			else:
 				count[word_tokenize_list[k]] = 1
 				if not word_tokenize_list[k] in index:
-					index[word_tokenize_list[k]] = countOfIndex + 1
+					index[word_tokenize_list[k]] = countOfIndex
 					countOfIndex += 1
 		#特徴ベクトルの生成
 		fv = [0] * len(index)

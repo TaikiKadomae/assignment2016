@@ -8,7 +8,6 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 
 
 argvs = sys.argv
-argc = len(argvs)
 
 #文分割
 openedFile = open(argvs[1]).read()
@@ -24,14 +23,14 @@ count = OrderedDict()
 index = shelve.open('freq_to_index_shelve.db')
 
 try:
-	countOfIndex = len(index)
+	countOfIndex = len(index) + 1
 	for i in range(len(word_tokenize_list)):
 		if word_tokenize_list[i] in count:
 			count[word_tokenize_list[i]] += 1
 		else:
 			count[word_tokenize_list[i]] = 1
 			if not word_tokenize_list[i] in index:
-				index[word_tokenize_list[i]] = countOfIndex + 1
+				index[word_tokenize_list[i]] = countOfIndex 
 				countOfIndex += 1
 	
 	#特徴ベクトルの生成

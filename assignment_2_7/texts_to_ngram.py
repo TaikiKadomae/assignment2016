@@ -30,18 +30,27 @@ for txt in line:
 		while node:
 			wordList.append(node.surface)
 			node = node.next
-	phraseList = []
-	for i in range(len(wordList)):
-		if (i != len(wordList) - 1):
-			if (n == '2'):
+
+		while '' in wordList:
+			wordList.remove('')
+
+		phraseList = []
+		for i in range(len(wordList)):
+			if (n == '2') and (i != len(wordList) - 1):
 				phraseList.append(str(wordList[i]) + str(wordList[i + 1]))
-			elif (n == '3') and (i != len(wordList) - 2):
+			elif (n == '3') and (i != len(wordList) - 2) and (i != len(wordList) - 1):
 				phraseList.append(str(wordList[i]) + str(wordList[i + 1]) + str(wordList[i + 2]))
-			else:
-				pass	
+			else:					
+				phraseList.append(str(wordList[i]))
+		
 	#辞書に追加
 	count = OrderedDict()
-	index = shelve.open('jp_index_bigram.db')
+	if (n == '1'):
+		index = shelve.open('jp_index.db')
+	elif (n == '2'):
+		index = shelve.open('jp_index_bigram.db')
+	elif (n =='3'):
+		index = shelve.open('jp_index_trigram.db')
 	countOfIndex = len(index) + 1
 	try:
 		countOfIndex = len(index) + 1

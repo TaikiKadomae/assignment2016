@@ -15,7 +15,7 @@ def read_instance(s):
 
 def read_data(train,test):
 	dataList = []
-	tdataList = []
+	t_dataList = []
 	indexList = []
 	for i in open(train).readlines():
 		tup = read_instance(i)
@@ -25,33 +25,33 @@ def read_data(train,test):
 		indexList.append(j[1][len(j[1])-1][0])
 
 	for k in open(test).readlines():
-		tup2 = read_instance(k)
-		tdataList.append(tup2)
+		t_tup = read_instance(k)
+		t_dataList.append(t_tup)
 		
 	max_index = max(indexList)
-	return (dataList, tdataList, max_index)
+	return (dataList, t_dataList, max_index)
 
-def add_fv(fv):
-	for i in fv[1]:
+def add_fv(ins):
+	for i in ins[1]:
 		weight[i[0]] += i[1]
 
-def sub_fv(fv):
-	for i in fv[1]:
+def sub_fv(ins):
+	for i in ins[1]:
 		weight[i[0]] -= i[1]
 
-def mult(fv):
+def mult(ins):
 	sumdp = 0
-	for i in fv[1]:
+	for i in ins[1]:
 		if (i[0] < len(weight)):
-			sumdp += i[1] * weight[i[0]]
+			sumdp += (i[1] * weight[i[0]])
 	return sumdp
 
 def update_weight(data):
 	for ins in data:
 		if (ins == data[0]):
-			if (ins[0] > 0):
+			if (ins[0] == 1):
 				add_fv(ins)
-			else:
+			elif (ins[0] == -1):
 				sub_fv(ins)
 		else:
 			if (ins[0] * mult(ins) <= 0):
@@ -62,12 +62,12 @@ def update_weight(data):
 				
 def evaluate(test_data):
 	count = 0
-	inscount = 0
+	i_count = 0
 	for ins in test_data:
-		inscount += 1
+		i_count += 1
 		if (ins[0] * mult(ins) > 0):
 			count += 1
-	return(count, inscount, count/inscount)
+	return(count, i_count, count/i_count)
 	
 if __name__ == "__main__":
 	train_data, test_data, max_index = read_data(sys.argv[1], sys.argv[2])
@@ -75,4 +75,6 @@ if __name__ == "__main__":
 	for i in range(int(sys.argv[3])):
 		update_weight(train_data)
 	correct, instance, rate = evaluate(test_data)
-	print(correct, instance, str(rate*100) + '%')
+	print('正解数         ' + str(correct))
+	print('インスタンス数 ' + str(instance))
+	print('正解率         ' + str(rate*100) + '%')

@@ -105,7 +105,7 @@ if __name__ == "__main__":
 		'-s',
 		dest ='updates',
 		type = 'int',
-		default = 10,
+		default = 100,
 		help = '更新回数'
 		)
 	parser.add_option(
@@ -140,12 +140,15 @@ if __name__ == "__main__":
 	nupdates = 0
 	for i in range(options.updates):
 		nupdates = update_weight(train_data, nupdates, options.margin)
-	ave_weight = averaged_weight(nupdates)
+		if(i % 2 == 0 and i != 0):
+				
+			ave_weight = averaged_weight(nupdates)
 	
-	if(options.mode_ave):
-		correct, instance, rate = evaluate(test_data,ave_weight)
-	else:
-		correct, instance, rate = evaluate(test_data,weight)
+			if(options.mode_ave):
+				correct, instance, rate = evaluate(test_data,ave_weight)
+			else:
+				correct, instance, rate = evaluate(test_data,weight)
+			print(str(rate*100) + '\n')
 	print('イテレーション数:' + str(options.updates))
 	print('正解数       　 :' + str(correct))
 	print('インスタンス数　:' + str(instance))
